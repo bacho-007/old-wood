@@ -1,0 +1,111 @@
+.switch__box {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    /* Center items vertically */
+    width: 180px;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 7px 1px;
+    background: rgb(14, 27, 246);
+    background: rgb(14, 27, 246);
+    background: rgb(32, 42, 218);
+    background: rgb(43, 54, 255);
+    background: -moz-linear-gradient(100deg, rgba(43, 54, 255, 1) 39%, rgba(100, 39, 187, 1) 53%, rgba(228, 8, 8, 0.9542017490589986) 65%);
+    background: -webkit-linear-gradient(100deg, rgba(43, 54, 255, 1) 39%, rgba(100, 39, 187, 1) 53%, rgba(228, 8, 8, 0.9542017490589986) 65%);
+    background: linear-gradient(100deg, rgba(43, 54, 255, 1) 39%, rgba(100, 39, 187, 1) 53%, rgba(228, 8, 8, 0.9542017490589986) 65%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2b36ff", endColorstr="#e40808", GradientType=1);
+}
+
+.switch__box__flag img {
+    width: 35px;
+    height: 35px;
+}
+
+.switch__box__flag2 img {
+    height: 35px;
+    width: 35px;
+    margin-left: 7px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: relative;
+    width: 60px;
+    height: 34px;
+    background-color: #2b36ff;
+    transition: .4s;
+    border-radius: 34px;
+    /* Add this line to ensure left is set to 0 initially */
+}
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    height: 35px;
+    /* Adjust height as needed */
+}
+
+.switch__box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider::before {
+    content: attr(data-text);
+    /* Show the text defined in 'data-text' attribute */
+    position: absolute;
+    height: 26px;
+    /* Adjust the height of the text */
+    width: 26px;
+    /* Adjust the width of the text */
+    top: 4px;
+    /* Adjust the top position */
+    left: 5px;
+    /* Adjust the left position */
+    background-color: #ffffff;
+    /* Change the background color */
+    color: rgb(238, 15, 15);
+    /* Change the text color */
+    border-radius: 50%;
+    transition: transform 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch__box input[type="checkbox"]:checked+.slider {
+    background-color: #e91e0b;
+}
+
+.switch__box input[type="checkbox"]:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider[data-text="eng"]::before {
+    content: 'Eng';
+    font-family: 'Volkhov', serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #0830f5;
+    /* Adjust the font size */
+}
+
+.slider[data-text="geo"]::before {
+    content: 'Geo';
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+
+}
