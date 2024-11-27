@@ -422,8 +422,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 });
 
-
-
+// ******ბურგერ მენიუს კოდი****
 
 
 

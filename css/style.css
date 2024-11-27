@@ -44,6 +44,11 @@ header {
       transition: all 0.5s;
 }
 
+/* *******ბურგერ მენიუს კოდი */
+
+
+
+
 .active {
       background: #b70f0f;
 
@@ -71,6 +76,13 @@ header {
 .header__logo__link,
 img {
       cursor: pointer;
+}
+
+
+.header__logo img {
+    width: 100%; /* Make the logo fill its container initially */
+    max-width: 600px; /* Set a maximum width */
+    height: auto; /* Maintain aspect ratio */
 }
 
 
