@@ -7,27 +7,29 @@
 }
 
 .menu__link {
-  margin: 18px;
-  padding-right: 15px;
+
+  /* padding-right: 15px; */
   font-family: "Honk", system-ui;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings: "MORF" 15, "SHLN" 50;
+  font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
   font-weight: 600;
   font-size: 30px;
-  line-height: 24px;
+  /* line-height: 24px; */
   color: #060606;
   display: inline-block;
   /* default display for larger screens */
 }
 
 .menu__link2 {
-  margin: 18px;
+
   padding-right: 15px;
   font-family: "Noto Sans Georgian", sans-serif;
   font-size: 20px;
-  line-height: 20px;
-  color: #060606;
+  /* line-height: 20px; */
+  color: #bbdf1a;
   font-weight: 500;
   display: inline-block;
 }
@@ -45,28 +47,29 @@
   background-color: rgba(59, 56, 56, 0.5);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 200px 15px;
   display: none;
   /* Hidden by default */
 }
 
 .about__content__box {
-  width: 80%;
+  width: 100%;
   max-width: 800px;
   aspect-ratio: 16 / 9;
   position: relative;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   background-color: beige;
-  padding: 0.8rem;
   border: 10px solid transparent;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 8, 255, 0.69);
-  margin: auto;
 }
 
 .about__content__box::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -17px;
   left: -17px;
@@ -80,7 +83,7 @@
 /* General image styling for both sections */
 .about__foto,
 .contact__foto {
-  width: 50%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
@@ -96,20 +99,35 @@
   /* Allow child elements to be aligned */
 }
 
+.Parent__about__foto {
+  width: 50%;
+  height: 100%;
+
+}
+
 /* Image container */
 .about__contact__img {
-  flex-shrink: 0;
-  width: 50%;
+
+  width: 100%;
   height: auto;
-  margin-right: 20px;
+
   /* Space between image and text */
 }
+
+.Parent__sub__title {
+  width: 50%;
+  height: auto;
+
+}
+
+
 
 /* Text container: this will align the text to the top right of the image */
 .about__sub__title {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   margin-top: 0;
   /* Remove any top margin */
   align-self: flex-start;
