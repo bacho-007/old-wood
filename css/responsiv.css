@@ -1,5 +1,4 @@
 @media (min-width: 300px) and (max-width: 800px) {
-
   .header__logo {
     position: absolute;
     left: 50%;
@@ -21,7 +20,7 @@
   /*ლოგო*/
 
   .menu {
-    right: 7%;
+    right: 35px;
     max-width: 80px;
     width: 80%;
   }
@@ -41,7 +40,6 @@
     /* შეცვლილი */
     height: auto;
   }
-
 
   /****ებაუთი********/
   .switch__box {
