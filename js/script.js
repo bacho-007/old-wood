@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var slider = document.getElementById("slider");
   var englishMenuItems = document.querySelectorAll(".menu__link");
   var georgianMenuItems = document.querySelectorAll(".menu__link2");
+  var georgianText = document.getElementById("georgianText");
+  var englishText = document.getElementById("englishText");
 
   function toggleMenuItems(language) {
     if (language === "eng") {
@@ -19,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "none";
       });
+      georgianText.style.display = "none";
+      englishText.style.display = "block";
     } else if (language === "geo") {
       englishMenuItems.forEach(function (item) {
         item.style.display = "none";
@@ -26,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "block";
       });
+      georgianText.style.display = "block";
+      englishText.style.display = "none";
     }
   }
 
@@ -69,6 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleMenuItems("eng"); // Initialize menu items to show English by default
 });
+
+
+
 
 // **********about da contact cliki**************
 
