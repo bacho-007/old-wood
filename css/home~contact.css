@@ -4,11 +4,11 @@
   width: 100%;
   height: 30px;
   margin-left: 20px;
+  position: relative;
+  /* აუცილებელია, რომ .menu__link-ის absolute იმუშაოს სწორად */
 }
 
 .menu__link {
-
-  /* padding-right: 15px; */
   font-family: "Honk", system-ui;
   font-optical-sizing: auto;
   font-style: normal;
@@ -17,10 +17,8 @@
     "SHLN" 50;
   font-weight: 600;
   font-size: 30px;
-  /* line-height: 24px; */
   color: #060606;
   display: inline-block;
-  /* default display for larger screens */
 }
 
 .menu__link2 {

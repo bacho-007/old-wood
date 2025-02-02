@@ -1,4 +1,4 @@
-@media (min-width: 370px) and (max-width: 800px) {
+@media (min-width: 300px) and (max-width: 800px) {
 
   .header__logo {
     position: absolute;
@@ -12,37 +12,34 @@
   .header__logo img {
     width: 100%;
     min-width: 40px;
+    margin-top: 50px;
     /* შეცვლილი */
     height: auto;
     cursor: pointer;
   }
 
   /*ლოგო*/
-  .header__inner {
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: 0.1em;
-  }
 
   .menu {
+    right: 7%;
+    max-width: 80px;
+    width: 80%;
+  }
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 60px;
-    margin-right: 80px;
-
-
+  .menu__link {
+    width: 100%;
+    min-width: 40px;
+    margin-top: 50px;
+    /* შეცვლილი */
     height: auto;
   }
 
-
-  .menu__link {
-    font-size: 20px;
-  }
-
   .menu__link2 {
-    font-size: 18px;
+    width: 100%;
+    min-width: 40px;
+    margin-top: 50px;
+    /* შეცვლილი */
+    height: auto;
   }
 
 
@@ -50,7 +47,8 @@
   .switch__box {
     width: 125px !important;
     height: 40px !important;
-    margin-left: 25px !important;
+    margin-left: 30px !important;
+    margin-top: 5px;
   }
 
   .switch {
