@@ -459,17 +459,18 @@ function handlePhoneClick(event) {
 
   // If screen width is between 320px and 800px, dial the number directly
   if (screenWidth >= 320 && screenWidth <= 800) {
-    // Direct dial (open dialer with number)
-    window.location.href = 'tel:+995598105125';
+     // For smaller screens (320px-800px), try dialing the number directly
+     window.location.href = 'tel:+995598105125';
   } else {
-    // Show phone number if screen width is larger than 800px
-    const popup = document.getElementById("phone-popup");
-    popup.classList.add("show");
+     // For larger screens, show the number
+     const popup = document.getElementById("phone-popup");
+     popup.classList.add("show");
 
-    // Hide the phone number after 10 seconds
-    setTimeout(() => {
-      popup.classList.remove("show");
-    }, 10000);
+     // Hide the phone number after 10 seconds
+     setTimeout(() => {
+        popup.classList.remove("show");
+     }, 6000);
   }
 }
+
 

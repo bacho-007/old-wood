@@ -194,6 +194,11 @@
     display: none !important;
   }
 
+  .contact__item i:hover {
+    display: none !important;
+  }
+
+
   .about__sub__title__p {
     font-size: 17px !important;
 
@@ -376,6 +381,11 @@
   .phone-popup {
     display: none !important;
   }
+
+  .contact__item i:hover {
+    display: none !important;
+  }
+
 
 
 }
