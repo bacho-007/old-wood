@@ -172,9 +172,7 @@
   padding: 10px;
   border-radius: 10px;
   background: transparent;
-
   cursor: pointer;
-
   box-shadow: -2px 4px 25px rgba(0, 255, 34, 0.69);
 }
 
@@ -252,8 +250,10 @@
 
 .contact__item {
   position: relative;
-  display: inline-block;
+  z-index: 1;
+  /* Ensure it stays above other elements */
 }
+
 
 .phone-popup {
   position: absolute;
@@ -263,7 +263,7 @@
   transform: translateX(-50%);
   background: #333;
   color: white;
-  padding: 5px 10px;
+  padding: 8px 15px;
   border-radius: 5px;
   font-size: 14px;
   opacity: 0;
