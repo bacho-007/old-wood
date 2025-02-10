@@ -450,37 +450,19 @@ function showPhoneNumberGe(event) {
 }
 
 // **********რესპონსივი დარეკვის ღილაკის*******
-
 function handlePhoneClick(event) {
   event.preventDefault();
 
-  // Get the screen width
   const screenWidth = window.innerWidth;
 
-  // If screen width is between 320px and 800px, dial the number directly
   if (screenWidth >= 320 && screenWidth <= 800) {
-    // For smaller screens (320px-800px), try dialing the number directly
     window.location.href = 'tel:+995598105125';
   } else {
-    // For larger screens, show the number
-    const popup = document.getElementById("phone-popup");
+    const popup = document.getElementById("phone-popup-ge");
     popup.classList.add("show");
 
-    // Hide the phone number after 6 seconds
     setTimeout(() => {
       popup.classList.remove("show");
     }, 6000);
   }
-
-  // Open WhatsApp or Messenger if clicked
-  document.querySelectorAll('.contact__item a').forEach(link => {
-    link.addEventListener('click', function (e) {
-      // Prevent the default link behavior
-      e.preventDefault();
-      
-      const href = this.getAttribute('href');
-      window.location.href = href; // Open the app directly
-    });
-  });
 }
-

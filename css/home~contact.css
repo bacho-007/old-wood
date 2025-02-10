@@ -258,7 +258,7 @@
 .phone-popup {
   position: absolute;
   top: -35px;
-  width: 100px;
+  width: 105px;
   left: 50%;
   transform: translateX(-50%);
   background: #333;
