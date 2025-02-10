@@ -2,7 +2,9 @@ window.addEventListener("scroll", function () {
   let header = document.querySelector(".header");
   header.classList.toggle("sticky", window.scrollY > 0);
 });
-// ************ ენის შეცვლის ფუნქცია************
+
+// ********eni Shecvla**********
+
 document.addEventListener("DOMContentLoaded", function () {
   var flagLink = document.getElementById("flagLink");
   var georgianFlag = document.getElementById("georgianFlag");
@@ -21,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "none";
       });
+      
+
       georgianText.style.display = "none";
       englishText.style.display = "block";
     } else if (language === "geo") {
@@ -30,51 +34,54 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "block";
       });
+     
+
       georgianText.style.display = "block";
       englishText.style.display = "none";
     }
   }
 
   // Set initial state: only English flag is lit up
-  georgianFlag.style.opacity = "0.3"; // Set Georgian flag to off initially
+  georgianFlag.style.opacity = "0.3";
 
   flagLink.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default link behavior
-    checkbox.checked = false; // Uncheck the checkbox
+    event.preventDefault();
+    checkbox.checked = false;
     flagLink.style.opacity = "1";
-    georgianFlag.style.opacity = "0.3"; // Reduce opacity of Georgian flag
-    slider.dataset.text = "eng"; // Set text to "eng"
-    toggleMenuItems("eng"); // Show English menu items
+    georgianFlag.style.opacity = "0.3";
+    slider.dataset.text = "eng";
+    toggleMenuItems("eng");
     updateBallPosition();
   });
 
   georgianFlag.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default link behavior
-    checkbox.checked = true; // Check the checkbox
-    flagLink.style.opacity = "0.3"; // Reduce opacity of American flag
+    event.preventDefault();
+    checkbox.checked = true;
+    flagLink.style.opacity = "0.3";
     georgianFlag.style.opacity = "1";
-    slider.dataset.text = "geo"; // Set text to "geo"
-    toggleMenuItems("geo"); // Show Georgian menu items
+    slider.dataset.text = "geo";
+    toggleMenuItems("geo");
     updateBallPosition();
   });
 
   slider.addEventListener("click", function (event) {
-    checkbox.checked = !checkbox.checked; // Toggle checkbox state
-    slider.dataset.text = checkbox.checked ? "geo" : "eng"; // Set text accordingly
-    toggleMenuItems(checkbox.checked ? "geo" : "eng"); // Show menu items based on language
+    checkbox.checked = !checkbox.checked;
+    slider.dataset.text = checkbox.checked ? "geo" : "eng";
+    toggleMenuItems(checkbox.checked ? "geo" : "eng");
     updateBallPosition();
   });
 
   checkbox.addEventListener("change", function (event) {
     if (checkbox.checked) {
-      georgianFlag.click(); // Simulate click on Georgian flag
+      georgianFlag.click();
     } else {
-      flagLink.click(); // Simulate click on American flag
+      flagLink.click();
     }
   });
 
   toggleMenuItems("eng"); // Initialize menu items to show English by default
 });
+
 
 
 
@@ -413,4 +420,56 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
-// ******ბურგერ მენიუს კოდი****
+// ******აიკონის დარეკვის კოდი****
+// English section
+function showPhoneNumberEn(event) {
+  event.preventDefault();
+  const popup = document.getElementById("phone-popup-en");
+
+  // Show phone number
+  popup.classList.add("show");
+
+  // Hide after 10 seconds
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 6000);
+}
+
+// Georgian section
+function showPhoneNumberGe(event) {
+  event.preventDefault();
+  const popup = document.getElementById("phone-popup-ge");
+
+  // Show phone number
+  popup.classList.add("show");
+
+  // Hide after 10 seconds
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 6000);
+}
+
+// **********რესპონსივი დარეკვის ღილაკის*******
+
+function handlePhoneClick(event) {
+  event.preventDefault();
+
+  // Get the screen width
+  const screenWidth = window.innerWidth;
+
+  // If screen width is between 320px and 800px, dial the number directly
+  if (screenWidth >= 320 && screenWidth <= 800) {
+    // Direct dial (open dialer with number)
+    window.location.href = 'tel:+995598105125';
+  } else {
+    // Show phone number if screen width is larger than 800px
+    const popup = document.getElementById("phone-popup");
+    popup.classList.add("show");
+
+    // Hide the phone number after 10 seconds
+    setTimeout(() => {
+      popup.classList.remove("show");
+    }, 10000);
+  }
+}
+

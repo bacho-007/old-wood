@@ -13,27 +13,9 @@
     <link rel="stylesheet" href="./css/home~contact.css" />
     <link rel="stylesheet" href="./css/table.css" />
 
-    <!-- Font Awesome -->
-    <script
-      src="https://kit.fontawesome.com/e279800c07.js"
-      crossorigin="anonymous"></script>
-
-    <!-- google fonts poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Honk&family=Protest+Revolution&display=swap"
-      rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet" />
-
-    <!-- google fonts Volkhov -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Volkhov:wght@400;700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   </head>
 
   <body>
@@ -56,38 +38,76 @@
             </div>
 
             <nav class="menu" id="navbar">
-              <a lang="en" class="menu__link" href="#" id="aboutLink">about</a>
+              <a lang="en" class="menu__link" href="#" id="aboutLink"
+                ><img src="./images/ვაფშე ახალი.png" alt=""
+              /></a>
 
               <a lang="ka" class="menu__link2" href="#" id="aboutLink2"
-                >შესახებ</a
-              >
+                ><img src="./images/რესპონსივ.png" alt=""
+              /></a>
 
               <!-- Ensure both sections use the same class for the content wrapper -->
               <div class="about__content" id="aboutContent">
                 <div class="about__content__box">
                   <div class="about__content__wrapper">
-                    <div class="Parent__about__foto">
-                      <div class="about__contact__img">
-                        <img
-                          class="about__foto"
-                          src="./images/eboxy_.jpg"
-                          alt="" />
-                      </div>
-                    </div>
                     <div class="Parent__sub__title">
                       <div class="about__sub__title">
-                        <h3>Lorem ipsum dolor sit</h3>
-                        <p>adipisicing</p>
+                        <h2 class="about__sub__title__h3">About</h2>
+                        <p class="about__sub__title__p">
+                          "I live in the countryside and work in my small
+                          workshop, where I create unique items in harmony with
+                          nature. I do not cut down live trees—I give new life
+                          to already dried wood and old materials. Each creation
+                          is a hand-crafted story. Here, ideas become art."
+                        </p>
+                        <div class="contact">
+                          <h2 class="contact__title">Contact</h2>
+                          <div class="contact__grid">
+                            <div class="contact__item">
+                              <a href="#" onclick="showPhoneNumberEn(event)">
+                                <i class="fa fa-phone"></i>
+                                <!-- Changed ID to phone-popup-en for English section -->
+                                <span id="phone-popup-en" class="phone-popup"
+                                  >598 105 125</span
+                                >
+                              </a>
+                            </div>
+
+                            <div class="contact__item">
+                              <a
+                                href="https://www.instagram.com/_old_wood/"
+                                target="_blank">
+                                <i class="fa-brands fa-instagram"></i>
+                              </a>
+                            </div>
+                            <div class="contact__item">
+                              <a
+                                href="https://www.facebook.com/bacho.davitashvili.94"
+                                target="_blank">
+                                <i class="fa-brands fa-facebook"></i>
+                              </a>
+                            </div>
+                            <div class="contact__item">
+                              <a
+                                href="https://wa.me/+995598105125"
+                                target="_blank">
+                                <i class="fa-brands fa-whatsapp"></i>
+                              </a>
+                            </div>
+                            <div class="contact__item">
+                              <a
+                                href="https://www.messenger.com/t/Bacho Davitashvili"
+                                target="_blank">
+                                <i class="fa-brands fa-facebook-messenger"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="close__button" id="closeButton">
-                    <span
-                      ><img
-                        class="close__button__contact"
-                        src="./images/delete.png"
-                        alt=""
-                    /></span>
+                    <i class="fa-solid fa-xmark"></i>
                   </div>
                 </div>
               </div>
@@ -96,30 +116,64 @@
               <div class="about__content" id="aboutContentGe">
                 <div class="about__content__box">
                   <div class="about__content__wrapper">
-                    <div class="Parent__about__foto">
-                      <div class="about__contact__img">
-                        <img
-                          class="about__foto"
-                          src="./images/eboxy_.jpg"
-                          alt="" />
+                    <div class="Parent__sub__title">
+                      <div class="about__sub__title">
+                        <h2 class="about__sub__title__h3">ჩემი გზა</h2>
+                        <p class="about__sub__title__p">
+                          „ვცხოვრობ სოფელში და ვმუშაობ ჩემს პატარა სახელოსნოში,
+                          სადაც ბუნებასთან ჰარმონიაში ვქმნი უნიკალურ ნივთებს. არ
+                          ვჭრი ცოცხალ ხეებს – ახალ სიცოცხლეს ვაძლევ უკვე გამხმარ
+                          ხესა და ძველ მასალებს. თითოეული ნამუშევარი ხელით
+                          შექმნილი ისტორიაა. აქ, იდეები ხელოვნებად იქცევა.“
+                        </p>
                       </div>
-                    </div>
+                      <div class="contact">
+                        <h2 class="contact__title">კონტაქტი</h2>
+                        <div class="contact__grid">
+                          <div class="contact__item">
+                            <a href="#" onclick="showPhoneNumberGe(event)">
+                              <i class="fa fa-phone"></i>
+                              <!-- Changed ID to phone-popup-ge for Georgian section -->
+                              <span id="phone-popup-ge" class="phone-popup"
+                                >598 105 125</span
+                              >
+                            </a>
+                          </div>
 
-                    <div class="about__sub__title">
-                      <div class="Parent__sub__title">
-                        <div class="about__sub__title">
-                          <h3>კონტენტი</h3>
-                          <p>აქ ქართული კონტენტ</p>
+                          <div class="contact__item">
+                            <a
+                              href="https://www.instagram.com/_old_wood/"
+                              target="_blank">
+                              <i class="fa-brands fa-instagram"></i>
+                            </a>
+                          </div>
+                          <div class="contact__item">
+                            <a
+                              href="https://www.facebook.com/bacho.davitashvili.94"
+                              target="_blank">
+                              <i class="fa-brands fa-facebook"></i>
+                            </a>
+                          </div>
+                          <div class="contact__item">
+                            <a
+                              href="https://wa.me/+995598105125"
+                              target="_blank">
+                              <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                          </div>
+                          <div class="contact__item">
+                            <a
+                              href="https://www.messenger.com/t/Bacho Davitashvili"
+                              target="_blank">
+                              <i class="fa-brands fa-facebook-messenger"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                     <div class="close__button" id="closeButtonGe">
-                      <span
-                        ><img
-                          class="close__button__contact"
-                          src="./images/delete.png"
-                          alt=""
-                      /></span>
+                      <i class="fa-solid fa-xmark"></i>
                     </div>
                   </div>
                 </div>
