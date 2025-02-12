@@ -451,19 +451,21 @@ function showPhoneNumberGe(event) {
 
 // **********რესპონსივი დარეკვის ღილაკის*******
 function handlePhoneClick(event) {
+  event.preventDefault();
+
   const screenWidth = window.innerWidth;
 
-  // მობილურ მოწყობილობებზე პირდაპირ დარეკვა
   if (screenWidth >= 320 && screenWidth <= 800) {
-    window.location.href = 'tel:+995598105125';
+    window.location.href = 'tel:+995598105125'; // პირდაპირ დარეკვაზე გადავიდა
   } else {
-    // დესკტოპზე ნომრის ჩვენება
-    event.preventDefault(); // მხოლოდ ტელეფონის ბმულისთვის
     const popup = document.getElementById("phone-popup-ge");
     popup.classList.add("show");
 
     setTimeout(() => {
       popup.classList.remove("show");
     }, 6000);
+    
+    // დამატებით: ერთი კლიკით გადადის დარეკვის ფუნქციაში
+    window.location.href = 'tel:+995598105125'; // ეს ორი ხაზი ასევე უზრუნველყოფს, რომ კლიკი დარეკვის ზონაში გადაგიყვანოს
   }
 }
