@@ -453,12 +453,12 @@ function showPhoneNumberGe(event) {
 function handlePhoneClick(event) {
   const screenWidth = window.innerWidth;
 
+  // მობილურ მოწყობილობებზე პირდაპირ დარეკვა
   if (screenWidth >= 320 && screenWidth <= 800) {
-    // მობილურ მოწყობილობებზე პირდაპირ დარეკვა
     window.location.href = 'tel:+995598105125';
   } else {
     // დესკტოპზე ნომრის ჩვენება
-    event.preventDefault();
+    event.preventDefault(); // მხოლოდ ტელეფონის ბმულისთვის
     const popup = document.getElementById("phone-popup-ge");
     popup.classList.add("show");
 
