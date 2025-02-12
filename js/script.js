@@ -451,13 +451,14 @@ function showPhoneNumberGe(event) {
 
 // **********რესპონსივი დარეკვის ღილაკის*******
 function handlePhoneClick(event) {
-  event.preventDefault();
-
   const screenWidth = window.innerWidth;
 
   if (screenWidth >= 320 && screenWidth <= 800) {
+    // მობილურ მოწყობილობებზე პირდაპირ დარეკვა
     window.location.href = 'tel:+995598105125';
   } else {
+    // დესკტოპზე ნომრის ჩვენება
+    event.preventDefault();
     const popup = document.getElementById("phone-popup-ge");
     popup.classList.add("show");
 
