@@ -16,6 +16,12 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet" />
   </head>
 
   <body>
@@ -53,7 +59,7 @@
                     <div class="Parent__sub__title">
                       <div class="about__sub__title">
                         <h2 class="about__sub__title__h3">About</h2>
-                        <p class="about__sub__title__p">
+                        <p class="about__sub__title__eng">
                           "I live in the countryside and work in my small
                           workshop, where I create unique items in harmony with
                           nature. I do not cut down live trees—I give new life
@@ -66,6 +72,7 @@
                             <div class="contact__item">
                               <a
                                 href="tel:+995598105125"
+                                id="phone-link"
                                 onclick="handlePhoneClick(event)">
                                 <i class="fa fa-phone"></i>
                                 <span id="phone-popup-en" class="phone-popup"
@@ -134,6 +141,7 @@
                           <div class="contact__item">
                             <a
                               href="tel:+995598105125"
+                              id="phone-link"
                               onclick="handlePhoneClick(event)">
                               <i class="fa fa-phone"></i>
                               <span id="phone-popup-en" class="phone-popup"
@@ -302,6 +310,41 @@
                 1000 <span class="table__price__lari">&#x20BE;</span>
               </p>
               <p class="table__buy" id="buyButton">add to cart</p>
+            </div>
+
+            <!-- ალერტის ფანჯარა -->
+            <!-- English Alert -->
+            <div id="customAlert__eng" class="custom-alert">
+              <div class="custom-alert-content">
+                <p id="customAlertMessage__eng" class="custom-alert-message">
+                  Item added to cart!
+                </p>
+                <p
+                  id="customAlertMessage__Restriction__eng"
+                  class="custom-alert-message__Restriction">
+                  You cannot add more than 4 items!
+                </p>
+                <button id="closeAlert__eng" class="custom-alert-close">
+                  OK
+                </button>
+              </div>
+            </div>
+
+            <!-- Georgian Alert -->
+            <div id="customAlert__geo" class="custom-alert">
+              <div class="custom-alert-content">
+                <p id="customAlertMessage__geo" class="custom-alert-message">
+                  ნივთი დაემატა კალათაში
+                </p>
+                <p
+                  id="customAlertMessage__Restriction__geo"
+                  class="custom-alert-message__Restriction">
+                  4 ნივთზე მეტს ვერ დაამატებთ!
+                </p>
+                <button id="closeAlert__geo" class="custom-alert-close">
+                  OK
+                </button>
+              </div>
             </div>
           </div>
 

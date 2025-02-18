@@ -160,6 +160,22 @@
   padding-bottom: 10px;
 }
 
+.about__sub__title__eng {
+  position: relative;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #D35400, #F1C40F);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+  border-bottom: 2px solid rgb(252, 180, 25);
+  padding-bottom: 10px;
+}
+
 .close__button {
   position: absolute;
   display: flex;

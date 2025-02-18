@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "none";
       });
-      
 
       georgianText.style.display = "none";
       englishText.style.display = "block";
@@ -34,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
       georgianMenuItems.forEach(function (item) {
         item.style.display = "block";
       });
-     
 
       georgianText.style.display = "block";
       englishText.style.display = "none";
@@ -81,10 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleMenuItems("eng"); // Initialize menu items to show English by default
 });
-
-
-
-
 
 // **********about da contact cliki**************
 
@@ -224,11 +218,12 @@ closeShoppingPopup.addEventListener("click", function () {
 });
 
 // ********კალათაში დამატების კოდი************
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   let cartCount = 0;
   let totalPrice = 0;
+
   const itemPrice = parseFloat(
-    document.querySelector(".table__price").getAttribute("data-price"),
+    document.querySelector(".table__price").getAttribute("data-price")
   );
   const itemName = document
     .querySelector(".item-name__title")
@@ -236,6 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const itemNumber = document
     .querySelector(".table__namber")
     .textContent.trim();
+
   const cartCountElement = document.getElementById("cartCount");
   const totalPriceElement = document.getElementById("totalPrice");
   const buyButton = document.getElementById("buyButton");
@@ -243,31 +239,84 @@ document.addEventListener("DOMContentLoaded", function () {
   const orderButton = document.getElementById("orderButton");
   const totalAndLariElement = document.getElementById("totalAndLari");
 
-  buyButton.addEventListener("click", function () {
+  // Get the language from the language toggle state
+  const getLanguage = () => {
+    return slider.dataset.text || "eng"; // Default to English
+  };
+
+  // Show the appropriate alert based on the current language
+  const showAlert = (type) => {
+    const language = getLanguage(); // Assuming this function returns "eng" or "geo"
+    const alertElement =
+      language === "eng" ?
+        document.getElementById("customAlert__eng")
+      : document.getElementById("customAlert__geo");
+
+    const customAlertMessage = alertElement.querySelector(
+      language === "eng" ?
+        "#customAlertMessage__eng"
+      : "#customAlertMessage__geo"
+    );
+    const customAlertMessageRestriction = alertElement.querySelector(
+      language === "eng" ?
+        "#customAlertMessage__Restriction__eng"
+      : "#customAlertMessage__Restriction__geo"
+    );
+
+    // Clear text for both messages initially
+    customAlertMessage.textContent = "";
+    customAlertMessageRestriction.textContent = "";
+
+    // Check for "add" and "restriction" types and set the message accordingly
+    if (type === "add") {
+      customAlertMessage.textContent =
+        language === "eng" ? "Item added to cart!" : "ნივთი დაემატა კალათში";
+    } else if (type === "restriction") {
+      customAlertMessageRestriction.textContent =
+        language === "eng" ?
+          "You cannot add more than 4 items!"
+        : "4 ნივთზე მეტს ვერ დაამატებთ!";
+    }
+
+    alertElement.classList.add("show"); // Show the alert
+
+    const closeAlertButton = alertElement.querySelector(
+      language === "eng" ? "#closeAlert__eng" : "#closeAlert__geo"
+    );
+    closeAlertButton.addEventListener("click", () => {
+      alertElement.classList.remove("show"); // Close the alert when clicked
+    });
+  };
+
+  buyButton.addEventListener("click", () => {
     if (cartCount < 4) {
       addItemToCart();
-      alert("Item added to cart!");
+      showAlert("add"); // Show add alert if item added
     } else {
-      alert("You cannot buy more than 4 items per purchase.");
+      showAlert("restriction"); // Show restriction alert if more than 4 items
     }
   });
 
-  function addItemToCart() {
+  const addItemToCart = () => {
     cartCount++;
     totalPrice += itemPrice;
     updateCart();
 
+    const itemImageSrc = document
+      .querySelector(".img_slider__img")
+      .getAttribute("src");
+
     const item = document.createElement("div");
     item.className = "cart-item";
     item.innerHTML = `
-            <img class="item-image" src="${document.querySelector(".img_slider__img").getAttribute("src")}" alt="Item Image">
-            <div class="item-details">
-                <span class="item-name">${itemName}</span>
-                <span class="item-number">${itemNumber}</span>
-            </div>
-            <span class="item-price" data-price="${itemPrice}">${itemPrice} <span class="table__price__lari">&#x20BE;</span></span>
-            <button class="delete-item">x</button>
-        `;
+      <img class="item-image" src="${itemImageSrc}" alt="Item Image">
+      <div class="item-details">
+        <span class="item-name">${itemName}</span>
+        <span class="item-number">${itemNumber}</span>
+      </div>
+      <span class="item-price" data-price="${itemPrice}">${itemPrice} <span class="table__price__lari">&#x20BE;</span></span>
+      <button class="delete-item">x</button>
+    `;
 
     const itemContainer = document.createElement("div");
     itemContainer.className = "cart-item-container";
@@ -280,15 +329,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cartItemsContainer.appendChild(itemContainer);
 
-    item.querySelector(".delete-item").addEventListener("click", function () {
+    item.querySelector(".delete-item").addEventListener("click", () => {
       cartItemsContainer.removeChild(itemContainer);
       cartCount--;
       totalPrice -= itemPrice;
       updateCart();
     });
-  }
+  };
 
-  function updateCart() {
+  const updateCart = () => {
     cartCountElement.textContent = cartCount;
     totalPriceElement.textContent = `Total: ${totalPrice.toFixed(1)}`;
 
@@ -303,17 +352,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // Apply other styles if needed
     totalPriceElement.style.fontWeight = "bold";
     totalPriceElement.style.fontSize = "20px";
-  }
+  };
 
   document
     .getElementById("closeShoppingPopup")
-    .addEventListener("click", function () {
+    .addEventListener("click", () => {
       document.getElementById("shoppingPopupContainer").style.display = "none";
     });
 
-  window.addEventListener("click", function (event) {
-    var popupContainer = document.getElementById("shoppingPopupContainer");
-    if (event.target == popupContainer) {
+  window.addEventListener("click", (event) => {
+    const popupContainer = document.getElementById("shoppingPopupContainer");
+    if (event.target === popupContainer) {
       popupContainer.style.display = "none";
     }
   });
@@ -456,7 +505,7 @@ function handlePhoneClick(event) {
   const screenWidth = window.innerWidth;
 
   if (screenWidth >= 320 && screenWidth <= 800) {
-    window.location.href = 'tel:+995598105125'; // პირდაპირ დარეკვაზე გადავიდა
+    window.location.href = "tel:+995598105125"; // პირდაპირ დარეკვაზე გადავიდა
   } else {
     const popup = document.getElementById("phone-popup-ge");
     popup.classList.add("show");
@@ -464,8 +513,8 @@ function handlePhoneClick(event) {
     setTimeout(() => {
       popup.classList.remove("show");
     }, 6000);
-    
+
     // დამატებით: ერთი კლიკით გადადის დარეკვის ფუნქციაში
-    window.location.href = 'tel:+995598105125'; // ეს ორი ხაზი ასევე უზრუნველყოფს, რომ კლიკი დარეკვის ზონაში გადაგიყვანოს
+    window.location.href = "tel:+995598105125"; // ეს ორი ხაზი ასევე უზრუნველყოფს, რომ კლიკი დარეკვის ზონაში გადაგიყვანოს
   }
 }
