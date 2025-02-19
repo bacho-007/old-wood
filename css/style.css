@@ -270,56 +270,6 @@ img {
   margin-top: 20px;
 }
 
-.popup {
-  width: 1000px;
-  min-height: 500px;
-  height: auto;
-  background-color: #fff;
-  border: 2px solid #000;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 80%;
-  text-align: center;
-  position: relative;
-}
-
-.popup-container__title {
-  color: #ed0808;
-}
-
-.popup-container__title__span {
-  color: aqua;
-}
-
-.close__shopping {
-  width: 20px;
-  height: 20px;
-}
-
-.close-popup {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.popup-content {
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.popup-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 .shopping__card {
   position: relative;
@@ -343,12 +293,18 @@ img {
   font-weight: bold;
 }
 
-
 .cart-item img.item-image {
+  width: clamp(45px, 12vw, 150px);
+  /* მინ. 45px, ადაპტირდება 10vw, მაქს. 150px */
+  height: auto;
+  /* ავტომატურად ინარჩუნებს პროპორციებს */
+  min-width: 60px;
+  /* მინიმალური სიგანე, რომ ძალიან პატარა არ გახდეს */
   max-width: 150px;
-  max-height: 150px;
+  /* მაქსიმალური სიგანე */
   border-radius: 10px;
 }
+
 
 .cart-item {
   display: flex;
@@ -415,21 +371,42 @@ img {
 
 .total-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  /* Ensures vertical alignment */
   margin-top: 15px;
+  flex-wrap: wrap;
+  /* Allow items to wrap to new lines on smaller screens */
 }
 
 .total__and__lari {
-  padding-right: 50px;
+  text-align: center;
+  margin-left: 0;
+  /* Removed conflicting margins */
+  margin-right: 0;
+  transition: margin-left 0.3s ease;
+  flex: 1;
+  /* Allow this to take available space */
+  max-width: 200px;
+  /* Limit max size to prevent overflow */
 }
 
-#totalAndLari {
-  padding: 0px;
+.initial-total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
 }
+
+.hidden {
+  display: none;
+}
+
+
 
 .order__box {
-  padding-left: 50px;
+  flex: 0 1 auto;
+  /* Prevent it from shrinking too much */
 }
 
 .order-button {
@@ -440,9 +417,9 @@ img {
   cursor: pointer;
   color: rgb(255, 255, 255);
   background: #0bf43a;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
-
+  font-family: "Merriweather", serif;
   box-shadow: 0 5px 30px rgba(0, 8, 255, 0.69);
 }
 

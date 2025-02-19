@@ -199,19 +199,22 @@
               <div class="popup" id="shoppingPopup">
                 <div class="popup-content">
                   <span class="close-popup" id="closeShoppingPopup">
-                    <img
-                      class="close__shopping"
-                      src="./images/twitter.png"
-                      alt="" />
+                    <div class="close__shopping">
+                      <i class="fa-solid fa-xmark"></i>
+                    </div>
                   </span>
                   <h1 class="popup-container__title">
                     Shopping
                     <span class="popup-container__title__span">Cart</span>
                   </h1>
+                  <div class="initial-total" id="initialTotal">
+                    Total: 0.0 <span class="table__price__lari">&#x20BE;</span>
+                  </div>
+
                   <div id="cartItems"></div>
                   <div class="total-container">
                     <div class="total__and__lari" id="totalAndLari">
-                      <span id="totalPrice">0</span>
+                      <span id="totalPrice"> Total: 0.0</span>
                       <span class="table__price__lari">&#x20BE;</span>
                     </div>
                     <div class="order__box">
@@ -295,13 +298,15 @@
             </div>
             <div id="infoPopupContainer" class="popup-container">
               <div class="popup">
-                <span id="closeInfoPopup" class="close-popup">&times;</span>
+                <span id="closeInfoPopup" class="close-popup"
+                  ><i class="fa-solid fa-xmark"></i
+                ></span>
+
                 <div class="popup-content">
                   <div class="item-name">
                     <p class="item-name__title">eboxy table</p>
                   </div>
                 </div>
-                <button class="popup-button">Close</button>
               </div>
             </div>
 

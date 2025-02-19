@@ -222,15 +222,26 @@ document.addEventListener("DOMContentLoaded", () => {
   let cartCount = 0;
   let totalPrice = 0;
 
-  const itemPrice = parseFloat(
-    document.querySelector(".table__price").getAttribute("data-price")
-  );
-  const itemName = document
-    .querySelector(".item-name__title")
-    .textContent.trim();
-  const itemNumber = document
-    .querySelector(".table__namber")
-    .textContent.trim();
+  const itemPriceElement = document.querySelector(".table__price");
+  const itemNameElement = document.querySelector(".item-name__title");
+  const itemNumberElement = document.querySelector(".table__namber");
+  const slider = document.querySelector(".slider");
+  const initialTotalElement = document.getElementById("initialTotal");
+
+  if (
+    !itemPriceElement ||
+    !itemNameElement ||
+    !itemNumberElement ||
+    !slider ||
+    !initialTotalElement
+  ) {
+    console.error("One or more elements are missing.");
+    return;
+  }
+
+  const itemPrice = parseFloat(itemPriceElement.getAttribute("data-price"));
+  const itemName = itemNameElement.textContent.trim();
+  const itemNumber = itemNumberElement.textContent.trim();
 
   const cartCountElement = document.getElementById("cartCount");
   const totalPriceElement = document.getElementById("totalPrice");
@@ -239,18 +250,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const orderButton = document.getElementById("orderButton");
   const totalAndLariElement = document.getElementById("totalAndLari");
 
-  // Get the language from the language toggle state
-  const getLanguage = () => {
-    return slider.dataset.text || "eng"; // Default to English
-  };
+  if (
+    !cartCountElement ||
+    !totalPriceElement ||
+    !buyButton ||
+    !cartItemsContainer ||
+    !orderButton ||
+    !totalAndLariElement
+  ) {
+    console.error("One or more essential elements are missing.");
+    return;
+  }
 
-  // Show the appropriate alert based on the current language
+  const getLanguage = () => slider.dataset.text || "eng";
+
   const showAlert = (type) => {
-    const language = getLanguage(); // Assuming this function returns "eng" or "geo"
+    const language = getLanguage();
     const alertElement =
       language === "eng" ?
         document.getElementById("customAlert__eng")
       : document.getElementById("customAlert__geo");
+
+    if (!alertElement) {
+      console.error("Alert element not found.");
+      return;
+    }
 
     const customAlertMessage = alertElement.querySelector(
       language === "eng" ?
@@ -263,37 +287,42 @@ document.addEventListener("DOMContentLoaded", () => {
       : "#customAlertMessage__Restriction__geo"
     );
 
-    // Clear text for both messages initially
+    if (!customAlertMessage || !customAlertMessageRestriction) {
+      console.error("Custom alert messages not found.");
+      return;
+    }
+
     customAlertMessage.textContent = "";
     customAlertMessageRestriction.textContent = "";
 
-    // Check for "add" and "restriction" types and set the message accordingly
     if (type === "add") {
       customAlertMessage.textContent =
         language === "eng" ? "Item added to cart!" : "ნივთი დაემატა კალათში";
     } else if (type === "restriction") {
       customAlertMessageRestriction.textContent =
         language === "eng" ?
-          "You cannot add more than 4 items!"
-        : "4 ნივთზე მეტს ვერ დაამატებთ!";
+          "You cannot add more than 3 items!"
+        : "3 ნივთზე მეტს ვერ დაამატებთ!";
     }
 
-    alertElement.classList.add("show"); // Show the alert
+    alertElement.classList.add("show");
 
     const closeAlertButton = alertElement.querySelector(
       language === "eng" ? "#closeAlert__eng" : "#closeAlert__geo"
     );
-    closeAlertButton.addEventListener("click", () => {
-      alertElement.classList.remove("show"); // Close the alert when clicked
-    });
+    if (closeAlertButton) {
+      closeAlertButton.addEventListener("click", () => {
+        alertElement.classList.remove("show");
+      });
+    }
   };
 
   buyButton.addEventListener("click", () => {
-    if (cartCount < 4) {
+    if (cartCount < 3) {
       addItemToCart();
-      showAlert("add"); // Show add alert if item added
+      showAlert("add");
     } else {
-      showAlert("restriction"); // Show restriction alert if more than 4 items
+      showAlert("restriction");
     }
   });
 
@@ -302,39 +331,40 @@ document.addEventListener("DOMContentLoaded", () => {
     totalPrice += itemPrice;
     updateCart();
 
-    const itemImageSrc = document
-      .querySelector(".img_slider__img")
-      .getAttribute("src");
+    const itemImageElement = document.querySelector(".img_slider__img");
+    if (!itemImageElement) {
+      console.error("Item image not found.");
+      return;
+    }
 
-    const item = document.createElement("div");
-    item.className = "cart-item";
-    item.innerHTML = `
-      <img class="item-image" src="${itemImageSrc}" alt="Item Image">
-      <div class="item-details">
-        <span class="item-name">${itemName}</span>
-        <span class="item-number">${itemNumber}</span>
-      </div>
-      <span class="item-price" data-price="${itemPrice}">${itemPrice} <span class="table__price__lari">&#x20BE;</span></span>
-      <button class="delete-item">x</button>
-    `;
+    const itemImageSrc = itemImageElement.getAttribute("src");
 
     const itemContainer = document.createElement("div");
     itemContainer.className = "cart-item-container";
-    itemContainer.appendChild(item);
 
-    // Append hr element after the item
-    const hr = document.createElement("hr");
-    hr.className = "cart-divider";
-    itemContainer.appendChild(hr);
+    itemContainer.innerHTML = `
+      <div class="cart-item">
+        <img class="item-image" src="${itemImageSrc}" alt="Item Image">
+        <div class="item-details">
+          <span class="item-name">${itemName}</span>
+          <span class="item-number">${itemNumber}</span>
+        </div>
+        <span class="item-price" data-price="${itemPrice}">${itemPrice} <span class="table__price__lari">&#x20BE;</span></span>
+        <button class="delete-item">x</button>
+      </div>
+      <hr class="cart-divider">
+    `;
 
     cartItemsContainer.appendChild(itemContainer);
 
-    item.querySelector(".delete-item").addEventListener("click", () => {
-      cartItemsContainer.removeChild(itemContainer);
-      cartCount--;
-      totalPrice -= itemPrice;
-      updateCart();
-    });
+    itemContainer
+      .querySelector(".delete-item")
+      .addEventListener("click", () => {
+        cartItemsContainer.removeChild(itemContainer);
+        cartCount--;
+        totalPrice -= itemPrice;
+        updateCart();
+      });
   };
 
   const updateCart = () => {
@@ -343,26 +373,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (cartCount === 0) {
       orderButton.style.display = "none";
-      totalAndLariElement.classList.remove("total__and__lari_with_item");
+      initialTotalElement.style.display = "block"; // საწყისი ტოტალის ჩვენება
+      totalAndLariElement.style.display = "none"; // ნამდვილი ტოტალის დამალვა
     } else {
       orderButton.style.display = "block";
-      totalAndLariElement.classList.add("total__and__lari_with_item");
+      initialTotalElement.style.display = "none"; // საწყისი ტოტალის დამალვა
+      totalAndLariElement.style.display = "flex"; // ნამდვილი ტოტალის ჩვენება
     }
 
-    // Apply other styles if needed
     totalPriceElement.style.fontWeight = "bold";
     totalPriceElement.style.fontSize = "20px";
   };
 
-  document
-    .getElementById("closeShoppingPopup")
-    .addEventListener("click", () => {
-      document.getElementById("shoppingPopupContainer").style.display = "none";
-    });
+  // როდესაც გვერდი იტვირთება, ვამოწმებთ კალათის სტატუსს
+  if (cartItemsContainer.children.length === 0) {
+    initialTotalElement.style.display = "block";
+    totalAndLariElement.style.display = "none";
+  } else {
+    initialTotalElement.style.display = "none";
+    totalAndLariElement.style.display = "flex";
+  }
 
   window.addEventListener("click", (event) => {
     const popupContainer = document.getElementById("shoppingPopupContainer");
-    if (event.target === popupContainer) {
+    if (popupContainer && event.target === popupContainer) {
       popupContainer.style.display = "none";
     }
   });

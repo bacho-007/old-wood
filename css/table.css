@@ -20,6 +20,9 @@
 
 .table__price__lari {
   color: green;
+  color: green;
+  padding-left: 6px;
+  font-size: 20;
 }
 
 .table__buy {
@@ -41,7 +44,7 @@
 .custom-alert {
   display: none;
   position: fixed;
-  top: 0;
+  top: -290;
   left: 0;
   right: 0;
   bottom: 0;
@@ -186,14 +189,14 @@
 
 ************infos kodi************* .popup-container {
   position: fixed;
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent black */
   z-index: 9999;
-  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -209,16 +212,19 @@
   z-index: 9999;
   justify-content: center;
   align-items: center;
+  padding: 0 15px;
+  /* გამოსწორებული */
 }
 
 /* Popup window */
 .popup {
-  background-color: #fff;
-  border: 2px solid #000;
-  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 350px;
+  height: auto;
+  background-color: #b86406;
+  padding: 5px 20px;
   border-radius: 10px;
-  max-width: 80%;
-  /* Adjust the width as needed */
   text-align: center;
   position: relative;
 }
@@ -238,21 +244,58 @@
 /* Text content */
 .popup-content {
   margin-bottom: 30px;
-  /* Adjust spacing between text and button */
 }
 
-/* Button in the right corner */
-.popup-button {
+
+.popup-container__title {
+  font-size: 35px;
+}
+
+.popup-container__title__span {
+  color: aqua;
+}
+
+.close-popup {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  /* Change button color */
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  top: 9;
+  right: 13;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  background: transparent;
   cursor: pointer;
+  box-shadow: -2px 4px 25px rgba(0, 255, 34, 0.69);
+
+}
+
+.close-popup i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: rgb(156, 94, 0);
+  font-size: 30px;
+  font-weight: 900;
+
+}
+
+
+.close__shopping i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: rgb(48, 29, 2);
+  font-size: 30px;
+  font-weight: 900;
+}
+
+#totalPrice {
+  font-size: 20px;
+  font-weight: 800;
 }
 
 /* *************buy kodi************* */
