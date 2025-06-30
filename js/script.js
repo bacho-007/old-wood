@@ -14,32 +14,43 @@ document.addEventListener("DOMContentLoaded", function () {
   var georgianMenuItems = document.querySelectorAll(".menu__link2");
   var georgianText = document.getElementById("georgianText");
   var englishText = document.getElementById("englishText");
+  var georgianDescription = document.getElementById("georgianDescription");
+  var englishDescription = document.getElementById("englishDescription");
 
   function toggleMenuItems(language) {
     if (language === "eng") {
-      englishMenuItems.forEach(function (item) {
-        item.style.display = "block";
-      });
-      georgianMenuItems.forEach(function (item) {
-        item.style.display = "none";
-      });
-
+      englishMenuItems.forEach(item => item.style.display = "block");
+      georgianMenuItems.forEach(item => item.style.display = "none");
       georgianText.style.display = "none";
       englishText.style.display = "block";
+      toggleDescription("eng");
     } else if (language === "geo") {
-      englishMenuItems.forEach(function (item) {
-        item.style.display = "none";
-      });
-      georgianMenuItems.forEach(function (item) {
-        item.style.display = "block";
-      });
-
+      englishMenuItems.forEach(item => item.style.display = "none");
+      georgianMenuItems.forEach(item => item.style.display = "block");
       georgianText.style.display = "block";
       englishText.style.display = "none";
+      toggleDescription("geo");
     }
   }
 
-  // Set initial state: only English flag is lit up
+  function toggleDescription(language) {
+    var georgianSpecs = document.querySelector(".item-specs");
+    var englishSpecs = document.querySelector(".item-specs-eng");
+
+    if (language === "eng") {
+      georgianDescription.style.display = "none";
+      englishDescription.style.display = "block";
+      georgianSpecs.style.display = "none";
+      englishSpecs.style.display = "block";
+    } else {
+      georgianDescription.style.display = "block";
+      englishDescription.style.display = "none";
+      georgianSpecs.style.display = "block";
+      englishSpecs.style.display = "none";
+    }
+  }
+
+
   georgianFlag.style.opacity = "0.3";
 
   flagLink.addEventListener("click", function (event) {
@@ -49,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     georgianFlag.style.opacity = "0.3";
     slider.dataset.text = "eng";
     toggleMenuItems("eng");
-    updateBallPosition();
   });
 
   georgianFlag.addEventListener("click", function (event) {
@@ -59,17 +69,16 @@ document.addEventListener("DOMContentLoaded", function () {
     georgianFlag.style.opacity = "1";
     slider.dataset.text = "geo";
     toggleMenuItems("geo");
-    updateBallPosition();
   });
 
-  slider.addEventListener("click", function (event) {
+  slider.addEventListener("click", function () {
     checkbox.checked = !checkbox.checked;
-    slider.dataset.text = checkbox.checked ? "geo" : "eng";
-    toggleMenuItems(checkbox.checked ? "geo" : "eng");
-    updateBallPosition();
+    var language = checkbox.checked ? "geo" : "eng";
+    slider.dataset.text = language;
+    toggleMenuItems(language);
   });
 
-  checkbox.addEventListener("change", function (event) {
+  checkbox.addEventListener("change", function () {
     if (checkbox.checked) {
       georgianFlag.click();
     } else {
@@ -77,8 +86,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  toggleMenuItems("eng"); // Initialize menu items to show English by default
+  toggleMenuItems("eng");
 });
+
 
 // **********about da contact cliki**************
 
@@ -269,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const alertElement =
       language === "eng" ?
         document.getElementById("customAlert__eng")
-      : document.getElementById("customAlert__geo");
+        : document.getElementById("customAlert__geo");
 
     if (!alertElement) {
       console.error("Alert element not found.");
@@ -279,12 +289,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const customAlertMessage = alertElement.querySelector(
       language === "eng" ?
         "#customAlertMessage__eng"
-      : "#customAlertMessage__geo"
+        : "#customAlertMessage__geo"
     );
     const customAlertMessageRestriction = alertElement.querySelector(
       language === "eng" ?
         "#customAlertMessage__Restriction__eng"
-      : "#customAlertMessage__Restriction__geo"
+        : "#customAlertMessage__Restriction__geo"
     );
 
     if (!customAlertMessage || !customAlertMessageRestriction) {
@@ -302,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
       customAlertMessageRestriction.textContent =
         language === "eng" ?
           "You cannot add more than 3 items!"
-        : "3 ნივთზე მეტს ვერ დაამატებთ!";
+          : "3 ნივთზე მეტს ვერ დაამატებთ!";
     }
 
     alertElement.classList.add("show");
