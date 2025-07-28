@@ -236,6 +236,70 @@
     font-size: 15px !important;
   }
 
+  /* ორდერის ფანჯრის რესპონსივი */
+  .order-container__maincontainer {
+    padding: 10px !important;
+  }
+
+  .order-container {
+    max-width: 95% !important;
+    width: 95% !important;
+    padding: 20px 15px !important;
+    margin: 15px 10px 10px 10px !important;
+    border-radius: 15px !important;
+    max-height: calc(100vh - 45px) !important;
+  }
+
+  .close-button {
+    top: 10px !important;
+    right: 15px !important;
+    font-size: 24px !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .order-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .order-container p {
+    font-size: 0.8rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  #orderForm {
+    gap: 12px !important;
+  }
+
+  .input-group {
+    margin-bottom: 3px !important;
+  }
+
+  .input-group input {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+
+  .input-group label {
+    left: 12px !important;
+    top: 10px !important;
+    font-size: 14px !important;
+  }
+
+  .input-group input:focus+label,
+  .input-group input:valid+label {
+    top: -7px !important;
+    font-size: 11px !important;
+  }
+
+  .submit-button {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    margin-top: 3px !important;
+  }
 }
 
 @media (min-width: 370px) and (max-width: 700px) {
@@ -437,5 +501,137 @@
   .table__buy {
     font-size: 20px !important;
     padding: 0 10 !important;
+  }
+
+  /* ორდერის ფანჯრის რესპონსივი */
+  .order-container__maincontainer {
+    padding: 15px !important;
+  }
+
+  .order-container {
+    max-width: 90% !important;
+    width: 90% !important;
+    padding: 25px 20px !important;
+    margin: 15px 20px 20px 20px !important;
+    border-radius: 18px !important;
+    max-height: calc(100vh - 55px) !important;
+  }
+
+  .close-button {
+    top: 12px !important;
+    right: 18px !important;
+    font-size: 26px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .order-title {
+    font-size: 1.6rem !important;
+    margin-bottom: 7px !important;
+  }
+
+  .order-container p {
+    font-size: 0.85rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  #orderForm {
+    gap: 13px !important;
+  }
+
+  .input-group {
+    margin-bottom: 4px !important;
+  }
+
+  .input-group input {
+    padding: 11px 14px !important;
+    font-size: 14px !important;
+    border-radius: 9px !important;
+  }
+
+  .input-group label {
+    left: 14px !important;
+    top: 11px !important;
+    font-size: 14px !important;
+  }
+
+  .input-group input:focus+label,
+  .input-group input:valid+label {
+    top: -7px !important;
+    font-size: 11px !important;
+  }
+
+  .submit-button {
+    padding: 11px 22px !important;
+    font-size: 15px !important;
+    border-radius: 9px !important;
+    margin-top: 4px !important;
+  }
+}
+
+/* ტაბლეტებისთვის (701px-1024px) */
+@media (min-width: 701px) and (max-width: 1024px) {
+  .order-container__maincontainer {
+    padding: 20px !important;
+  }
+
+  .order-container {
+    max-width: 450px !important;
+    width: 85% !important;
+    padding: 28px 25px !important;
+    margin: 15px 25px 25px 25px !important;
+    border-radius: 18px !important;
+    max-height: calc(100vh - 65px) !important;
+  }
+
+  .close-button {
+    top: 15px !important;
+    right: 20px !important;
+    font-size: 27px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .order-title {
+    font-size: 1.7rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .order-container p {
+    font-size: 0.9rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  #orderForm {
+    gap: 14px !important;
+  }
+
+  .input-group {
+    margin-bottom: 5px !important;
+  }
+
+  .input-group input {
+    padding: 12px 15px !important;
+    font-size: 15px !important;
+    border-radius: 10px !important;
+  }
+
+  .input-group label {
+    left: 15px !important;
+    top: 12px !important;
+    font-size: 15px !important;
+  }
+
+  .input-group input:focus+label,
+  .input-group input:valid+label {
+    top: -8px !important;
+    font-size: 12px !important;
+  }
+
+  .submit-button {
+    padding: 12px 24px !important;
+    font-size: 15px !important;
+    border-radius: 10px !important;
+    margin-top: 5px !important;
   }
 }

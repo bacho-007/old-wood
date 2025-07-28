@@ -332,36 +332,55 @@
         </div>
 
         <!-- **********orderis kodi************** -->
-        <div class="order-container__maincontainer">
+        <!-- **********orderis kodi************** -->
+        <div class="order-container__maincontainer" style="display: none">
           <div class="order-container" id="orderContainer">
             <button class="close-button" id="closeOrderContainer">
               &times;
             </button>
-            <h1 class="order-title">Shopping</h1>
-            <p>Please fill out the form below to place your order:</p>
+            <h1 class="order-title">🛒 Shopping</h1>
+            <p>გთხოვთ შეავსოთ ქვემოთ მოცემული ფორმა შეკვეთისთვის:</p>
+
             <ul class="order-list">
               <li>First Name</li>
               <li>Phone Number</li>
               <li>Email</li>
-              <!-- Add Email field -->
               <li>Address</li>
             </ul>
-            <form id="orderForm">
-              <input type="text" id="firstName" placeholder="First Name" required />
-              <input type="text" id="phoneNumber" placeholder="Phone Number" required />
 
-              <input type="text" id="address" placeholder="Address" required />
+            <form id="orderForm">
+              <div class="input-group">
+                <input type="text" id="firstName" required />
+                <label for="firstName">სახელი</label>
+              </div>
+
+              <div class="input-group">
+                <input type="tel" id="phoneNumber" required />
+                <label for="phoneNumber">ტელეფონის ნომერი</label>
+              </div>
+
+              <div class="input-group">
+                <input type="email" id="email" required />
+                <label for="email">ელ-ფოსტა</label>
+              </div>
+
+              <div class="input-group">
+                <input type="text" id="address" required />
+                <label for="address">მისამართი</label>
+              </div>
+
               <button type="submit" id="submitButton" class="submit-button">
-                Submit
+                ✨ შეკვეთის გაგზავნა
               </button>
             </form>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <script src="./js/script.js"></script>
+        <!-- ორდერის ღილაკი -->
+        <button class="order-button" id="orderButton">შეუკვეთე</button>
+
+
+        <script src="./js/script.js"></script>
 </body>
 
 </html>

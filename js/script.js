@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
   georgianFlag.style.opacity = "0.3";
 
   flagLink.addEventListener("click", function (event) {
@@ -88,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleMenuItems("eng");
 });
-
 
 // **********about da contact cliki**************
 
@@ -138,8 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ************იმგ სლაიდერ*******************
-// JavaScript for slider functionality
-// JavaScript for slider functionality
 const sliderImages = document.querySelectorAll(".img_slider__img");
 const arrowLeft = document.querySelector(".left-arrow");
 const arrowRight = document.querySelector(".right-arrow");
@@ -412,41 +408,120 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ************ორდერის კოდი***************
+// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
+// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
 
+/// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
+
+// ორდერის ღილაკი - გამოსწორებული ფუნქციონალობა
 var orderButton = document.getElementById("orderButton");
 var orderContainer = document.getElementById("orderContainer");
+var mainContainer = document.querySelector('.order-container__maincontainer');
 var confirmationMessage = document.getElementById("confirmationMessage");
 var popupContainer = document.getElementById("shoppingPopupContainer");
 
-// Add click event listener to the order button
-orderButton.addEventListener("click", function () {
-  // Show the order container when the button is clicked
-  orderContainer.style.display = "block";
-  // Hide the popup-container
-  popupContainer.style.display = "none";
-});
+// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
 
-// Handle form submission
-document
-  .getElementById("orderForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    // Show the confirmation message
-    confirmationMessage.style.display = "block";
-    // Hide the order container after submission
-    orderContainer.style.display = "none";
+// DOM load event
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOM loaded"); // Debug log
+
+  // ორდერის ღილაკი - გამოსწორებული ფუნქციონალობა
+  var orderButton = document.getElementById("orderButton");
+  var orderContainer = document.getElementById("orderContainer");
+  var mainContainer = document.querySelector('.order-container__maincontainer');
+  var confirmationMessage = document.getElementById("confirmationMessage");
+  var popupContainer = document.getElementById("shoppingPopupContainer");
+
+  console.log("Order button:", orderButton);
+  console.log("Order container:", orderContainer);
+  console.log("Main container:", mainContainer);
+
+  if (!orderButton) {
+    console.error("Order button not found!");
+    return;
+  }
+
+  // ორდერის ღილაკზე კლიკი
+  orderButton.addEventListener("click", function () {
+    console.log("Order button clicked!"); // Debug log
+
+    // ძირითადი კონტეინერის ჩვენება (maincontainer-ი)
+    if (mainContainer) {
+      console.log("Showing main container"); // Debug log
+      mainContainer.style.display = "flex";
+      mainContainer.style.animation = 'fadeIn 0.3s ease-in-out';
+    } else {
+      console.log("Main container not found, using orderContainer"); // Debug log
+      // თუ ძველი სტრუქტურაა, orderContainer-ს ვაჩვენებთ
+      if (orderContainer) {
+        orderContainer.style.display = "flex";
+      }
+    }
+
+    // popup-container-ის დამალვა
+    if (popupContainer) {
+      popupContainer.style.display = "none";
+    }
   });
-var closeOrderButton = document.getElementById("closeOrderContainer");
-var orderContainer = document.getElementById("orderContainer");
 
-closeOrderButton.addEventListener("click", function () {
-  orderContainer.style.display = "none";
+  // ფორმის გაგზავნა - ახალი თანამედროვე ვერსია
+  document.getElementById('orderForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const submitButton = document.getElementById('submitButton');
+    const container = document.getElementById('orderContainer');
+
+    // Add success animation
+    container.classList.add('success-animation');
+
+    // Change button text and style
+    submitButton.innerHTML = '✅ შეკვეთა გაგზავნილია!';
+    submitButton.style.background = 'linear-gradient(135deg, #2ed573, #17c0eb)';
+
+    // Reset after 2 seconds
+    setTimeout(() => {
+      submitButton.innerHTML = '✨ შეკვეთის გაგზავნა';
+      submitButton.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      container.classList.remove('success-animation');
+
+      // Reset form
+      document.getElementById('orderForm').reset();
+
+      // ორდერის კონტეინერის დამალვა - mainContainer-ის მეშვეობით
+      if (mainContainer) {
+        mainContainer.style.display = 'none';
+      } else {
+        container.style.display = 'none';
+      }
+    }, 2000);
+  });
+
+  // დახურვის ღილაკი
+  document.getElementById('closeOrderContainer').addEventListener('click', function () {
+    // mainContainer-ის დამალვა ანიმაციით
+    if (mainContainer) {
+      mainContainer.style.animation = 'fadeOut 0.3s ease-in-out';
+      setTimeout(() => {
+        mainContainer.style.display = 'none';
+      }, 300);
+    } else {
+      // თუ ძველი სტრუქტურაა
+      if (orderContainer) {
+        orderContainer.style.display = 'none';
+      }
+    }
+  });
+
+  // Backdrop-ზე კლიკი - მხოლოდ ახალი სტრუქტურისთვის
+  if (mainContainer) {
+    mainContainer.addEventListener('click', function (e) {
+      if (e.target === this) {
+        document.getElementById('closeOrderContainer').click();
+      }
+    });
+  }
 });
-
-// *****************telegramis kodi*****************
-
-// *************sHEKVEtIS GAGZAVNIS KODI************
 
 // ***********************ფოტოს ზუმის კოდი**********************
 
