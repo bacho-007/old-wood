@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var georgianDescription = document.getElementById("georgianDescription");
   var englishDescription = document.getElementById("englishDescription");
 
+  // ორდერის სისტემის ენის მართვა
+  function updateOrderLanguage(language) {
+    // ეს ფუნქციის კოდი ამოვშლით, რადგან არღარ გვჭირდება ცალკეული ღილაკები
+  }
+
   function toggleMenuItems(language) {
     if (language === "eng") {
       englishMenuItems.forEach(item => item.style.display = "block");
@@ -408,120 +413,330 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
-// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
+// ************ორდერის კოდი - განახლებული ბილინგვური ვერსია - Telegram ბოტით***************
 
-/// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
+// Telegram Bot კონფიგურაცია
+const TELEGRAM_CONFIG = {
+  BOT_TOKEN: '8246826133:AAGBqGPjAi5aSG5ihQOfAKIb_5MUPOggs2k', // შენი ბოტის ტოკენი
+  CHAT_ID: '6463341442' // შენი Telegram ID
+};
 
-// ორდერის ღილაკი - გამოსწორებული ფუნქციონალობა
-var orderButton = document.getElementById("orderButton");
-var orderContainer = document.getElementById("orderContainer");
-var mainContainer = document.querySelector('.order-container__maincontainer');
-var confirmationMessage = document.getElementById("confirmationMessage");
-var popupContainer = document.getElementById("shoppingPopupContainer");
+// Telegram-ზე შეტყობინების გაგზავნის ფუნქცია
+async function sendToTelegram(orderData, language) {
+  const cartItems = getCartItems(); // კალათის ინფორმაციის მიღება
 
-// ************ორდერის კოდი (გამოსწორებული ვერსია)***************
+  // შეტყობინების ტექსტის შექმნა
+  let message = language === 'geo' ?
+    `🛒 *ახალი შეკვეთა!*\n\n` :
+    `🛒 *New Order!*\n\n`;
+
+  message += language === 'geo' ?
+    `👤 *სახელი:* ${orderData.name}\n📞 *ტელეფონი:* ${orderData.phone}\n📍 *მისამართი:* ${orderData.address}\n\n` :
+    `👤 *Name:* ${orderData.name}\n📞 *Phone:* ${orderData.phone}\n📍 *Address:* ${orderData.address}\n\n`;
+
+  // კალათის ნივთების დამატება
+  if (cartItems.length > 0) {
+    message += language === 'geo' ? `📦 *შეკვეთილი ნივთები:*\n` : `📦 *Ordered Items:*\n`;
+    cartItems.forEach((item, index) => {
+      message += `${index + 1}. ${item.name}\n   ${language === 'geo' ? 'კოდი' : 'Code'}: ${item.number}\n   ${language === 'geo' ? 'ფასი' : 'Price'}: ${item.price}₾\n\n`;
+    });
+
+    const totalPrice = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
+    message += language === 'geo' ?
+      `💰 *სრული ღირებულება:* ${totalPrice.toFixed(1)}₾` :
+      `💰 *Total Amount:* ${totalPrice.toFixed(1)}₾`;
+  }
+
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CONFIG.CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    if (response.ok) {
+      return { success: true };
+    } else {
+      const errorData = await response.json();
+      console.error('Telegram API Error:', errorData);
+      return { success: false, error: errorData };
+    }
+  } catch (error) {
+    console.error('Network Error:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// კალათის ნივთების მიღების ფუნქცია
+function getCartItems() {
+  const cartItemsContainer = document.getElementById("cartItems");
+  const items = [];
+
+  if (cartItemsContainer) {
+    const cartItemElements = cartItemsContainer.querySelectorAll('.cart-item');
+    cartItemElements.forEach(item => {
+      const name = item.querySelector('.item-name')?.textContent || '';
+      const number = item.querySelector('.item-number')?.textContent || '';
+      const priceElement = item.querySelector('.item-price');
+      const price = priceElement?.getAttribute('data-price') || '0';
+
+      items.push({ name, number, price });
+    });
+  }
+
+  return items;
+}
 
 // DOM load event
 document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM loaded"); // Debug log
 
-  // ორდერის ღილაკი - გამოსწორებული ფუნქციონალობა
-  var orderButton = document.getElementById("orderButton");
-  var orderContainer = document.getElementById("orderContainer");
-  var mainContainer = document.querySelector('.order-container__maincontainer');
-  var confirmationMessage = document.getElementById("confirmationMessage");
-  var popupContainer = document.getElementById("shoppingPopupContainer");
+  // მთავარი ორდერის ღილაკი (კალათიდან)
+  const orderButton = document.getElementById("orderButton");
 
-  console.log("Order button:", orderButton);
-  console.log("Order container:", orderContainer);
-  console.log("Main container:", mainContainer);
+  // ორდერის კონტეინერები
+  const orderContainerGeo = document.getElementById("orderContainerGeo");
+  const orderContainerEng = document.getElementById("orderContainerEng");
 
-  if (!orderButton) {
-    console.error("Order button not found!");
-    return;
+  // დახურვის ღილაკები
+  const closeOrderContainerGeo = document.getElementById("closeOrderContainerGeo");
+  const closeOrderContainerEng = document.getElementById("closeOrderContainerEng");
+
+  // ფორმები
+  const orderFormGeo = document.getElementById("orderFormGeo");
+  const orderFormEng = document.getElementById("orderFormEng");
+
+  // წარდგენის ღილაკები
+  const submitButtonGeo = document.getElementById("submitButtonGeo");
+  const submitButtonEng = document.getElementById("submitButtonEng");
+
+  // ენის განსაზღვრის ფუნქცია
+  const getCurrentLanguage = () => {
+    const slider = document.getElementById("slider");
+    return slider ? slider.dataset.text || "eng" : "eng";
+  };
+
+  // მთავარი ორდერის ღილაკის event listener
+  if (orderButton) {
+    orderButton.addEventListener("click", function () {
+      const currentLanguage = getCurrentLanguage();
+
+      // Shopping popup-ის დამალვა
+      const popupContainer = document.getElementById("shoppingPopupContainer");
+      if (popupContainer) popupContainer.style.display = "none";
+
+      // ენის მიხედვით შესაბამისი კონტეინერის ჩვენება
+      if (currentLanguage === "geo") {
+        if (orderContainerGeo) {
+          orderContainerGeo.style.display = "flex";
+        }
+        if (orderContainerEng) {
+          orderContainerEng.style.display = "none";
+        }
+      } else {
+        if (orderContainerEng) {
+          orderContainerEng.style.display = "flex";
+        }
+        if (orderContainerGeo) {
+          orderContainerGeo.style.display = "none";
+        }
+      }
+    });
   }
 
-  // ორდერის ღილაკზე კლიკი
-  orderButton.addEventListener("click", function () {
-    console.log("Order button clicked!"); // Debug log
-
-    // ძირითადი კონტეინერის ჩვენება (maincontainer-ი)
-    if (mainContainer) {
-      console.log("Showing main container"); // Debug log
-      mainContainer.style.display = "flex";
-      mainContainer.style.animation = 'fadeIn 0.3s ease-in-out';
-    } else {
-      console.log("Main container not found, using orderContainer"); // Debug log
-      // თუ ძველი სტრუქტურაა, orderContainer-ს ვაჩვენებთ
-      if (orderContainer) {
-        orderContainer.style.display = "flex";
-      }
-    }
-
-    // popup-container-ის დამალვა
-    if (popupContainer) {
-      popupContainer.style.display = "none";
-    }
-  });
-
-  // ფორმის გაგზავნა - ახალი თანამედროვე ვერსია
-  document.getElementById('orderForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const submitButton = document.getElementById('submitButton');
-    const container = document.getElementById('orderContainer');
-
-    // Add success animation
-    container.classList.add('success-animation');
-
-    // Change button text and style
-    submitButton.innerHTML = '✅ შეკვეთა გაგზავნილია!';
-    submitButton.style.background = 'linear-gradient(135deg, #2ed573, #17c0eb)';
-
-    // Reset after 2 seconds
-    setTimeout(() => {
-      submitButton.innerHTML = '✨ შეკვეთის გაგზავნა';
-      submitButton.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-      container.classList.remove('success-animation');
-
-      // Reset form
-      document.getElementById('orderForm').reset();
-
-      // ორდერის კონტეინერის დამალვა - mainContainer-ის მეშვეობით
-      if (mainContainer) {
-        mainContainer.style.display = 'none';
-      } else {
-        container.style.display = 'none';
-      }
-    }, 2000);
-  });
-
-  // დახურვის ღილაკი
-  document.getElementById('closeOrderContainer').addEventListener('click', function () {
-    // mainContainer-ის დამალვა ანიმაციით
-    if (mainContainer) {
-      mainContainer.style.animation = 'fadeOut 0.3s ease-in-out';
+  // ქართული კონტეინერის დახურვა
+  if (closeOrderContainerGeo && orderContainerGeo) {
+    closeOrderContainerGeo.addEventListener("click", function () {
+      orderContainerGeo.style.animation = 'fadeOut 0.3s ease-in-out';
       setTimeout(() => {
-        mainContainer.style.display = 'none';
+        orderContainerGeo.style.display = 'none';
+        orderContainerGeo.style.animation = ''; // animation reset
       }, 300);
-    } else {
-      // თუ ძველი სტრუქტურაა
-      if (orderContainer) {
-        orderContainer.style.display = 'none';
-      }
-    }
-  });
+    });
+  }
 
-  // Backdrop-ზე კლიკი - მხოლოდ ახალი სტრუქტურისთვის
-  if (mainContainer) {
-    mainContainer.addEventListener('click', function (e) {
+  // ინგლისური კონტეინერის დახურვა
+  if (closeOrderContainerEng && orderContainerEng) {
+    closeOrderContainerEng.addEventListener("click", function () {
+      orderContainerEng.style.animation = 'fadeOut 0.3s ease-in-out';
+      setTimeout(() => {
+        orderContainerEng.style.display = 'none';
+        orderContainerEng.style.animation = ''; // animation reset
+      }, 300);
+    });
+  }
+
+  // ქართული ფორმის submission
+  if (orderFormGeo && submitButtonGeo) {
+    orderFormGeo.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // ფორმის მონაცემების წაკითხვა
+      const orderData = {
+        name: document.getElementById('firstNameGeo').value.trim(),
+        phone: document.getElementById('phoneNumberGeo').value.trim(),
+        address: document.getElementById('addressGeo').value.trim()
+      };
+
+      // ვალიდაცია
+      if (!orderData.name || !orderData.phone || !orderData.address) {
+        alert('გთხოვთ შეავსოთ ყველა ველი!');
+        return;
+      }
+
+      // ღილაკის შეცვლა loading სტატუსზე
+      submitButtonGeo.innerHTML = '⏳ გაგზავნა...';
+      submitButtonGeo.disabled = true;
+
+      try {
+        // Telegram-ზე გაგზავნა
+        const result = await sendToTelegram(orderData, 'geo');
+
+        if (result.success) {
+          const container = orderContainerGeo.querySelector('.order-container');
+          container.classList.add('success-animation');
+
+          submitButtonGeo.innerHTML = '✅ შეკვეთა გაგზავნილია!';
+          submitButtonGeo.style.background = 'linear-gradient(135deg, #2ed573, #17c0eb)';
+
+          setTimeout(() => {
+            submitButtonGeo.innerHTML = '✨ შეკვეთის გაგზავნა';
+            submitButtonGeo.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            submitButtonGeo.disabled = false;
+            container.classList.remove('success-animation');
+            orderFormGeo.reset();
+            orderContainerGeo.style.display = 'none';
+
+            // კალათის გაცარიელება
+            clearCart();
+          }, 2000);
+        } else {
+          throw new Error(result.error);
+        }
+      } catch (error) {
+        console.error('Error sending order:', error);
+        alert('შეცდომა: ვერ გაიგზავნა შეკვეთა. გთხოვთ სცადოთ ხელახლა.');
+
+        submitButtonGeo.innerHTML = '✨ შეკვეთის გაგზავნა';
+        submitButtonGeo.disabled = false;
+      }
+    });
+  }
+
+  // ინგლისური ფორმის submission
+  if (orderFormEng && submitButtonEng) {
+    orderFormEng.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // ფორმის მონაცემების წაკითხვა
+      const orderData = {
+        name: document.getElementById('firstNameEng').value.trim(),
+        phone: document.getElementById('phoneNumberEng').value.trim(),
+        address: document.getElementById('addressEng').value.trim()
+      };
+
+      // ვალიდაცია
+      if (!orderData.name || !orderData.phone || !orderData.address) {
+        alert('Please fill out all fields!');
+        return;
+      }
+
+      // ღილაკის შეცვლა loading სტატუსზე
+      submitButtonEng.innerHTML = '⏳ Sending...';
+      submitButtonEng.disabled = true;
+
+      try {
+        // Telegram-ზე გაგზავნა
+        const result = await sendToTelegram(orderData, 'eng');
+
+        if (result.success) {
+          const container = orderContainerEng.querySelector('.order-container');
+          container.classList.add('success-animation');
+
+          submitButtonEng.innerHTML = '✅ Order Submitted!';
+          submitButtonEng.style.background = 'linear-gradient(135deg, #2ed573, #17c0eb)';
+
+          setTimeout(() => {
+            submitButtonEng.innerHTML = '✨ Submit Order';
+            submitButtonEng.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            submitButtonEng.disabled = false;
+            container.classList.remove('success-animation');
+            orderFormEng.reset();
+            orderContainerEng.style.display = 'none';
+
+            // კალათის გაცარიელება
+            clearCart();
+          }, 2000);
+        } else {
+          throw new Error(result.error);
+        }
+      } catch (error) {
+        console.error('Error sending order:', error);
+        alert('Error: Could not submit order. Please try again.');
+
+        submitButtonEng.innerHTML = '✨ Submit Order';
+        submitButtonEng.disabled = false;
+      }
+    });
+  }
+
+  // Backdrop კლიკი - ორივე კონტეინერისთვის
+  if (orderContainerGeo) {
+    orderContainerGeo.addEventListener('click', function (e) {
       if (e.target === this) {
-        document.getElementById('closeOrderContainer').click();
+        closeOrderContainerGeo.click();
+      }
+    });
+  }
+
+  if (orderContainerEng) {
+    orderContainerEng.addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeOrderContainerEng.click();
       }
     });
   }
 });
+
+// კალათის გაცარიელების ფუნქცია (შეკვეთის შემდეგ)
+function clearCart() {
+  const cartItemsContainer = document.getElementById("cartItems");
+  const cartCountElement = document.getElementById("cartCount");
+  const totalPriceElement = document.getElementById("totalPrice");
+  const orderButton = document.getElementById("orderButton");
+  const initialTotalElement = document.getElementById("initialTotal");
+  const totalAndLariElement = document.getElementById("totalAndLari");
+
+  if (cartItemsContainer) {
+    cartItemsContainer.innerHTML = '';
+  }
+
+  if (cartCountElement) {
+    cartCountElement.textContent = '0';
+  }
+
+  if (totalPriceElement) {
+    totalPriceElement.textContent = 'Total: 0.0';
+  }
+
+  if (orderButton) {
+    orderButton.style.display = "none";
+  }
+
+  if (initialTotalElement) {
+    initialTotalElement.style.display = "block";
+  }
+
+  if (totalAndLariElement) {
+    totalAndLariElement.style.display = "none";
+  }
+}
 
 // ***********************ფოტოს ზუმის კოდი**********************
 
@@ -588,52 +803,3 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
-// ******აიკონის დარეკვის კოდი****
-// English section
-function showPhoneNumberEn(event) {
-  event.preventDefault();
-  const popup = document.getElementById("phone-popup-en");
-
-  // Show phone number
-  popup.classList.add("show");
-
-  // Hide after 10 seconds
-  setTimeout(() => {
-    popup.classList.remove("show");
-  }, 6000);
-}
-
-// Georgian section
-function showPhoneNumberGe(event) {
-  event.preventDefault();
-  const popup = document.getElementById("phone-popup-ge");
-
-  // Show phone number
-  popup.classList.add("show");
-
-  // Hide after 10 seconds
-  setTimeout(() => {
-    popup.classList.remove("show");
-  }, 6000);
-}
-
-// **********რესპონსივი დარეკვის ღილაკის*******
-function handlePhoneClick(event) {
-  event.preventDefault();
-
-  const screenWidth = window.innerWidth;
-
-  if (screenWidth >= 320 && screenWidth <= 800) {
-    window.location.href = "tel:+995598105125"; // პირდაპირ დარეკვაზე გადავიდა
-  } else {
-    const popup = document.getElementById("phone-popup-ge");
-    popup.classList.add("show");
-
-    setTimeout(() => {
-      popup.classList.remove("show");
-    }, 6000);
-
-    // დამატებით: ერთი კლიკით გადადის დარეკვის ფუნქციაში
-    window.location.href = "tel:+995598105125"; // ეს ორი ხაზი ასევე უზრუნველყოფს, რომ კლიკი დარეკვის ზონაში გადაგიყვანოს
-  }
-}

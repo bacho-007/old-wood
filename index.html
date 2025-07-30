@@ -332,52 +332,73 @@
         </div>
 
         <!-- **********orderis kodi************** -->
-        <!-- **********orderis kodi************** -->
-        <div class="order-container__maincontainer" style="display: none">
-          <div class="order-container" id="orderContainer">
-            <button class="close-button" id="closeOrderContainer">
+        <!-- ქართული ორდერის კონტეინერი -->
+        <div class="order-container__maincontainer" id="orderContainerGeo" style="display: none">
+          <div class="order-container">
+            <button class="close-button" id="closeOrderContainerGeo">
               &times;
             </button>
-            <h1 class="order-title">🛒 Shopping</h1>
+            <h1 class="order-title">🛒 შოპინგი</h1>
             <p>გთხოვთ შეავსოთ ქვემოთ მოცემული ფორმა შეკვეთისთვის:</p>
-
             <ul class="order-list">
-              <li>First Name</li>
-              <li>Phone Number</li>
-              <li>Email</li>
-              <li>Address</li>
+              <li>სახელი</li>
+              <li>ტელეფონის ნომერი</li>
+              <li>მისამართი</li>
             </ul>
-
-            <form id="orderForm">
+            <form id="orderFormGeo">
               <div class="input-group">
-                <input type="text" id="firstName" required />
-                <label for="firstName">სახელი</label>
+                <input type="text" id="firstNameGeo" required />
+                <label for="firstNameGeo">სახელი</label>
               </div>
-
               <div class="input-group">
-                <input type="tel" id="phoneNumber" required />
-                <label for="phoneNumber">ტელეფონის ნომერი</label>
+                <input type="tel" id="phoneNumberGeo" required />
+                <label for="phoneNumberGeo">ტელეფონის ნომერი</label>
               </div>
-
               <div class="input-group">
-                <input type="email" id="email" required />
-                <label for="email">ელ-ფოსტა</label>
+                <input type="text" id="addressGeo" required />
+                <label for="addressGeo">მისამართი</label>
               </div>
-
-              <div class="input-group">
-                <input type="text" id="address" required />
-                <label for="address">მისამართი</label>
-              </div>
-
-              <button type="submit" id="submitButton" class="submit-button">
+              <button type="submit" id="submitButtonGeo" class="submit-button">
                 ✨ შეკვეთის გაგზავნა
               </button>
             </form>
           </div>
         </div>
 
-        <!-- ორდერის ღილაკი -->
-        <button class="order-button" id="orderButton">შეუკვეთე</button>
+        <!-- ინგლისური ორდერის კონტეინერი -->
+        <div class="order-container__maincontainer" id="orderContainerEng" style="display: none">
+          <div class="order-container">
+            <button class="close-button" id="closeOrderContainerEng">
+              &times;
+            </button>
+            <h1 class="order-title">🛒 Shopping</h1>
+            <p>Please fill out the form below to place your order:</p>
+            <ul class="order-list">
+              <li>First Name</li>
+              <li>Phone Number</li>
+              <li>Address</li>
+            </ul>
+            <form id="orderFormEng">
+              <div class="input-group">
+                <input type="text" id="firstNameEng" required />
+                <label for="firstNameEng">First Name</label>
+              </div>
+              <div class="input-group">
+                <input type="tel" id="phoneNumberEng" required />
+                <label for="phoneNumberEng">Phone Number</label>
+              </div>
+              <div class="input-group">
+                <input type="text" id="addressEng" required />
+                <label for="addressEng">Address</label>
+              </div>
+              <button type="submit" id="submitButtonEng" class="submit-button">
+                ✨ Submit Order
+              </button>
+            </form>
+          </div>
+        </div>
+
+
 
 
         <script src="./js/script.js"></script>
