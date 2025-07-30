@@ -263,6 +263,17 @@
   /* Ensure it stays above other elements */
 }
 
+.contact__item a {
+  pointer-events: auto;
+  z-index: 9999;
+
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+
+
+}
+
 
 .phone-popup {
   position: absolute;
