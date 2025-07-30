@@ -267,10 +267,15 @@
   display: inline-block;
   width: 100%;
   height: 100%;
-
-
 }
 
+.contact__item a:focus,
+.contact__item a:active {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 
 .phone-popup {
   position: absolute;
